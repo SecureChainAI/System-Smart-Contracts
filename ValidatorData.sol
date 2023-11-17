@@ -249,11 +249,11 @@ contract ValidatorData is Ownable {
 
     function viewValidatorRewards(address validator) public view returns(uint256 rewardAmount){
 
-        (, InterfaceValidator.Status validatorStatus, uint256 coins, , , ,  ) = valContract.getValidatorInfo(validator);
+        (, InterfaceValidator.Status validatorStatus, , , , ,  ) = valContract.getValidatorInfo(validator);
 
 
         // if validator is jailed, non-exist, or created, then he will not get any rewards
-        if(coins == 0 || validatorStatus == InterfaceValidator.Status.Jailed || validatorStatus == InterfaceValidator.Status.NotExist || validatorStatus == InterfaceValidator.Status.Created ){
+        if(validatorStatus == InterfaceValidator.Status.Jailed || validatorStatus == InterfaceValidator.Status.NotExist || validatorStatus == InterfaceValidator.Status.Created ){
             return 0;
         }
 
